@@ -1,0 +1,21 @@
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+
+# Database
+sqlalchemy==2.0.30
+sqlite3
+
+# Auth & Security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.1.3
+
+# Pydantic Schema
+pydantic==2.7.1
+pydantic-settings==2.2.1
+
+# Background tasks / client-side fetch
+httpx==0.27.0
+
+# Env config (opsional)
+python-dotenv==1.0.1
