@@ -21,7 +21,7 @@ class User(UserBase):
     class Config:
         from_attributes = True
 
-class UserUpdate(UserBase):
+class UserUpdate(BaseModel):
     name: Optional[str] = None
     username: Optional[str] = None
     address: Optional[str] = None
