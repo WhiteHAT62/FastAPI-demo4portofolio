@@ -24,7 +24,7 @@ def get_user(db: Session, user_id: int):
 
 def get_users(db: Session, skip: int = 0, limit: int = 10):
     users = db.query(models.User).offset(skip).limit(limit).all()
-    return [{"id": user.id, "role": user.role} for user in users]
+    return users
 
 def update_user(db: Session, user_id: int, user_update: schemas.UserUpdate):
     db_user = db.query(models.User).filter(models.User.id == user_id).first()
@@ -52,6 +52,14 @@ def update_user_password(db: Session, user_id: int, password_update: schemas.Pas
     db.commit()
     db.refresh(db_user)
     return {"message": "Password updated successfully"}
+
+def delete_user(db: Session, user_id: int):
+    user = db.query(models.User).filter(models.User.id == user_id).first()
+    if not user:
+        return None
+    db.delete(user)
+    db.commit()
+    return user
 
 # Book
 def create_book(db: Session, book: schemas.BookCreate):

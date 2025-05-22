@@ -1,7 +1,7 @@
 import enum
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, Enum
 from sqlalchemy.orm import relationship
-from .database import Base
+from app.database import Base
 
 class RoleEnum(str, enum.Enum):
     admin = "admin"
@@ -19,6 +19,7 @@ class User(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     role = Column(Enum(RoleEnum), default=RoleEnum.user)
 
+    # relasi ke Borrowed
     borrowed_books = relationship("Borrowed", back_populates="user")
 
 class Book(Base):
@@ -31,6 +32,7 @@ class Book(Base):
     date = Column(Date, default=None)
     stock = Column(Integer, default=0)
 
+    # relasi ke Borrowed
     borrowed_by = relationship("Borrowed", back_populates="book")
 
 class Borrowed(Base):

@@ -42,3 +42,4 @@ def get_current_admin(current_user: models.User = Depends(get_current_user)):
             headers={"WWW-Authenticate": "Bearer"}
         )
     return current_user
+
