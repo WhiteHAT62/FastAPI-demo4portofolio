@@ -93,8 +93,12 @@ class BorrowedCreate(BorrowedBase):
     pass
 
 
-class Borrowed(BorrowedBase):
+class BorrowedResponse(BaseModel):
     id: int
+    user: str
+    book: str
+    date_borrowed: date
+    date_due: date
 
     class Config:
         from_attributes = True
