@@ -2,6 +2,7 @@ from typing import Optional
 from datetime import date
 from pydantic import BaseModel, EmailStr
 
+
 # User schema
 class UserBase(BaseModel):
     name: str
@@ -11,8 +12,10 @@ class UserBase(BaseModel):
     phone: str
     email: EmailStr
 
+
 class UserCreate(UserBase):
     pass
+
 
 class User(UserBase):
     id: int
@@ -21,6 +24,7 @@ class User(UserBase):
     class Config:
         from_attributes = True
 
+
 class UserUpdate(BaseModel):
     name: Optional[str] = None
     username: Optional[str] = None
@@ -28,9 +32,11 @@ class UserUpdate(BaseModel):
     phone: Optional[str] = None
     email: Optional[EmailStr] = None
 
+
 class PasswordUpdate(BaseModel):
     password: str
     new_password: str
+
 
 class UserResponse(BaseModel):
     id: int
@@ -44,6 +50,7 @@ class UserResponse(BaseModel):
     class Config:
         from_attributes = True
 
+
 # Book schema
 class BookBase(BaseModel):
     name: str
@@ -55,11 +62,24 @@ class BookBase(BaseModel):
 class BookCreate(BookBase):
     pass
 
-class Book(BookBase):
+class BookResponse(BaseModel):
     id: int
+    name: str
+    author: str
+    isbn: str
+    date: date
+    stock: int
 
     class Config:
         from_attributes = True
+
+class BookUpdate(BaseModel):
+    name: Optional[str] = None
+    author: Optional[str] = None
+    isbn: Optional[str] = None
+    date: Optional[date] = None
+    stock: Optional[int] = None
+
 
 # Borrowed schema
 class BorrowedBase(BaseModel):
@@ -68,8 +88,10 @@ class BorrowedBase(BaseModel):
     date_borrowed: date
     date_due: date
 
+
 class BorrowedCreate(BorrowedBase):
     pass
+
 
 class Borrowed(BorrowedBase):
     id: int
@@ -77,10 +99,12 @@ class Borrowed(BorrowedBase):
     class Config:
         from_attributes = True
 
+
 # login schema
 class LoginRequest(BaseModel):
     email: str
     password: str
+
 
 class TokenResponse(BaseModel):
     access_token: str
