@@ -31,7 +31,7 @@ def add_to_blacklist(db: Session, token: str, user_id: int):
         blacklisted = models.BlacklistedToken(
             token=token,
             user_id=user_id,
-            blacklisted_at=datetime.now(timezone.utc)  # ✅ ini bagian penting
+            blacklisted_at=datetime.now(timezone.utc)
         )
         db.add(blacklisted)
         db.commit()
