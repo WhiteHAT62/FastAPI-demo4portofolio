@@ -1,5 +1,6 @@
 import enum
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, Enum
+
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Enum, DateTime
 from sqlalchemy.orm import relationship
 from app.database import Base
 
@@ -46,3 +47,11 @@ class Borrowed(Base):
 
     user = relationship("User", back_populates="borrowed_books")
     book = relationship("Book", back_populates="borrowed_by")
+
+class BlacklistedToken(Base):
+    __tablename__ = "blacklisted_tokens"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, nullable=False)
+    token = Column(String, unique=True, nullable=False)
+    blacklisted_at = Column(DateTime)
